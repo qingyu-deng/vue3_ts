@@ -1,8 +1,7 @@
 <template>
     <div>
         <el-menu
-            :collapse="false"
-
+            :collapse="state.isSidebarNavCollapse"
             text-color="#eee"
             active-text-color="#4dbcff"
             :default-active="state.currentMenu"
@@ -15,7 +14,7 @@
 </template>
 <script lang="ts">
 import {useStore} from "vuex";
-import { defineComponent, reactive ,computed} from "vue";
+import { defineComponent, reactive ,computed, ref} from "vue";
 import MENU from "./menu.vue";
 
 export default defineComponent({
@@ -27,7 +26,6 @@ export default defineComponent({
             currentMenu: computed(()=>store.getters.GET_CURRENTMENU),
             isSidebarNavCollapse: computed(()=>store.getters.getIsSidebarNavCollapse),
         });
-        
         return {
             state,
         };

@@ -1,12 +1,12 @@
 <template>
     <div class="main-container">
         <aside class="aside__top">
-            <!-- <span
-                class="iconfont icon-nav toggleNavCollapse"
+            <span
+                class="iconfont el-icon-s-operation toggleNavCollapse"
                 :class="{ active: state.isSidebarNavCollapse }"
                 @click="toggleNavCollapse"
             >
-            </span> -->
+            </span>
             <el-breadcrumb separator="/">
                 <transition-group name="breadcrumb">
                     <!-- 防止面包屑导航出现 首页/首页， v-if="route.name!='home'" -->
@@ -84,6 +84,7 @@ export default defineComponent({
             state,
             loginOut,
             full,
+            toggleNavCollapse
         };
     },
 });

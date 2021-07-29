@@ -2,8 +2,8 @@
 .sidebar {
     width: 200px !important;
     height: 100%;
-    background: #304156;
-    transition: all 0.25s;
+    // background: #304156;
+    
     position: fixed;
     top: 0;
     bottom: 0;
@@ -31,6 +31,10 @@
     /* .el-menu-item.is-active {
         background: #293748 !important;
     } */
+    .el-menu{
+        border: none !important;
+    }
+   
 }
 
 /* 主体内容 */
@@ -47,6 +51,7 @@
 .navCollapsed {
     .sidebar {
         width: 64px !important;
+        transition: all 0.25s;
         // ul {
         //     display: none;
         // }
