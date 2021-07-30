@@ -46,7 +46,7 @@
                     </el-dropdown>
                 </div>
                 <div class="quit-system" @click="loginOut">
-                    <span class="iconfont icon-quit"></span>
+                    <span class="iconfont el-icon-switch-button"></span>
                 </div>
             </div>
         </aside>
