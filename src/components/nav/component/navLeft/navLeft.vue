@@ -7,6 +7,7 @@
             :default-active="state.currentMenu"
             class="theme-bg"
             id="menu"
+            :unique-opened="true"
         >
             <MENU :menuList="state.sidebarMenu"></MENU>
         </el-menu>

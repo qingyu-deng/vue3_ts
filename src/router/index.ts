@@ -244,6 +244,35 @@ export const DynamicRoutes = [
                     name: "联系我们",
                     icon: "el-icon-phone",
                 },
+            },
+            {
+                path: "else",
+                component: () => import("@/views/else/index.vue"),
+                name: "else",
+                meta: {
+                    name: "其他组件",
+                    icon: "el-icon-question",
+                },
+                children:[
+                    {
+                        path: "convas",
+                        component: () => import("@/views/else/canvas.vue"),
+                        name: "convas",
+                        meta: {
+                            name: "页面生成图片",
+                            icon: "el-icon-picture-outline",
+                        },
+                    },
+                    {
+                        path: "code",
+                        component: () => import("@/views/else/code.vue"),
+                        name: "code",
+                        meta: {
+                            name: "动态二维码",
+                            icon: "el-icon-full-screen",
+                        },
+                    }
+                ]
             }
         ],
         
