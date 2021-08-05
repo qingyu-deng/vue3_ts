@@ -1,10 +1,9 @@
 // 后端路由
 import permissionList from "@/utils/permission";
-//本地路由
-import dynamicRoutes from "@/router/dynamic-router";
-import { recursionRouter, setDefaultRoute } from "@/utils/recursion-router";
+import { setDefaultRoute } from "@/utils/recursion-router";
 //固定路由
 import router, { DynamicRoutes } from "@/router/index";
+import view from "@/components/view/view.vue";
 function typeOf(obj: any): any {
     const toString: any = Object.prototype.toString;
     const map: any = {
@@ -47,13 +46,12 @@ function clone(data: any): any {
 const actions = {
     async FETCH_PERMISSION({ commit }: any) {
         //处理需要动态的路由
-        let routes: any = recursionRouter(permissionList, dynamicRoutes);
+        let routes: Array<any> = filterAsyncRouter(permissionList);
         //不需要动态的路由（深拷贝）
         let MainContainer = clone(DynamicRoutes).find(
             (v: any) => v.path === ""
         );
-        // let MainContainer:any = DynamicRoutes.find(v => v.path === '');
-        let children: any = [];
+        let children: Array<any> = [];
         children = MainContainer.children;
         //将两种路由结合生成左边的导航栏
         children = children.concat(routes);
@@ -71,13 +69,31 @@ const actions = {
         setDefaultRoute([MainContainer]);
         /*  初始路由 */
         let initialRoutes = router.options.routes;
-        // console.log(DynamicRoutes)
-        // resetRouter()
         router.addRoute(MainContainer);
-        // MainContainer.children=[]
         /* 完整的路由表 */
         // @ts-ignore //忽略提示
         commit("SET_PERMISSION", [...initialRoutes, ...DynamicRoutes]);
     },
 };
+export const loadView = (view:String) => { // 路由懒加载
+    return () => import(`@/views/${view}`)
+};
+//递归处理后端数据
+function filterAsyncRouter(asyncRouterMap:Array<any>){
+    return asyncRouterMap.filter((route:any)=>{
+        if(route.children){
+            route.component=view;
+        }else{
+            route.component=loadView(route.component)
+        };
+        if (route.children != null && route.children && route.children.length) {
+            route.children = filterAsyncRouter(route.children)
+          } else {
+            delete route['children']
+            delete route['redirect']
+          }
+        return true
+    });
+};
+
 export default actions;

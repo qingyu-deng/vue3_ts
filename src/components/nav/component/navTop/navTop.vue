@@ -51,7 +51,13 @@
             </div>
         </aside>
         <!-- 内容容器 -->
-        <router-view class="content"></router-view>
+        <router-view></router-view>
+        <!-- <router-view v-slot="{ Component }">
+            <keep-alive v-if="router.currentRoute._value.meta.keepAlive">
+                <component :is="Component"  />
+            </keep-alive>
+            <component :is="Component" v-if="!router.currentRoute._value.meta.keepAlive" />
+        </router-view> -->
     </div>
 </template>
 <script lang="ts">
@@ -73,7 +79,7 @@ export default defineComponent({
             store.commit("toggleNavCollapse");
         };
         let full = () => {
-           screenfull.isEnabled&&screenfull.toggle()
+            screenfull.isEnabled && screenfull.toggle();
         };
         let loginOut = () => {
             window.localStorage.removeItem("token");

@@ -8,7 +8,8 @@ const routes: Array<RouteRecordRaw> = [
         path: "/login",
         name: "login",
         component: () => import("@/views/login/login.vue"),
-    }
+    },
+   
 ];
 
 const router = createRouter({
@@ -45,12 +46,19 @@ router.afterEach((to: any, from: any, next: any) => {
 });
   
 /* 固定的路由 */
+/*
+    meta:{
+        name:侧边栏名字,
+        icon:侧边栏图标,
+        hide:是否在侧边栏隐藏
+    }
+*/ 
 export const DynamicRoutes = [
     {
         path: "",
         component:  () => import("@/components/nav/nav.vue"),
         name: "container",
-        // redirect: '/router',
+        // redirect: 'home',
         meta: {
             // requiresAuth: true,
             name: "首页",
@@ -60,7 +68,6 @@ export const DynamicRoutes = [
                 path: "home",
                 component: () => import("@/views/home/home.vue"),
                 name: "home",
-                
                 meta: {
                     name: "首页",
                     icon: "el-icon-s-home",
@@ -73,6 +80,7 @@ export const DynamicRoutes = [
                 meta: {
                     name: "路由管理",
                     icon: "el-icon-guide",
+                    hide:false
                 },
             },
             {
@@ -109,6 +117,7 @@ export const DynamicRoutes = [
                         meta: {
                             name: "Element图标",
                             icon: "el-icon-caret-bottom",
+                            hide:true
                         },
                     },
                     {
@@ -274,9 +283,10 @@ export const DynamicRoutes = [
                     }
                 ]
             }
-        ],
+            
+        ]
         
-    },
+    }
 ];
 
 export default router;
