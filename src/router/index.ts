@@ -117,7 +117,7 @@ export const DynamicRoutes = [
                         meta: {
                             name: "Element图标",
                             icon: "el-icon-caret-bottom",
-                            hide:true
+                            // hide:true
                         },
                     },
                     {
