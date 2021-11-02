@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw ,} from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import store from "@/store/index";
 //进度条
 import NProgress from 'nprogress' ;
@@ -19,12 +19,17 @@ const router = createRouter({
 
 router.beforeEach((to: any, from: any, next: any) => {
     NProgress.start();
+    //未登陆
     if (!window.localStorage.getItem("token") && to.path !== "/login") {
         return next({ path: "/login" });
-    }
-    if (!store.state.permissionList) {
-        store.dispatch("FETCH_PERMISSION").then(() => {
-            next(to.path);
+    };
+    //已登陆
+    if(window.localStorage.getItem("token")&&to.path == "/login") return next({ path: "/" });
+    //重新加载动态路由
+    if (!store.state.permissionList&&to.path!='/login') {
+        // router.removeRoute('router');
+        return store.dispatch("FETCH_PERMISSION").then(() => {
+            next({ ...to, replace: true });
         });
     } else {
         next();
@@ -44,7 +49,6 @@ router.afterEach((to: any, from: any, next: any) => {
     //目前左边导航选中的active
     store.commit("SET_CURRENT_MENU", to.name);
 });
-  
 /* 固定的路由 */
 /*
     meta:{

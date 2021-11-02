@@ -65,6 +65,7 @@ import { computed, defineComponent, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import screenfull from "screenfull";
+import { createRouter} from "vue-router";
 export default defineComponent({
     setup() {
         const store = useStore();
@@ -82,9 +83,9 @@ export default defineComponent({
             screenfull.isEnabled && screenfull.toggle();
         };
         let loginOut = () => {
+            router.go(0);
             window.localStorage.removeItem("token");
-
-            router.push({ path: "/login" });
+            router.replace({ path: "/login" });
         };
         return {
             state,

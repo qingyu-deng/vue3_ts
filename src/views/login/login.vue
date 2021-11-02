@@ -37,9 +37,11 @@ export default defineComponent({
     setup() {
         let router=useRouter();
         let store=useStore();
-        //重新触发路由
-        store.commit("SET_PERMISSION",null);
+       
         let  login =async ()=>{
+            // location.reload();
+             //重新触发路由
+            store.commit("SET_PERMISSION",null);
             router.push({path:"/"});
             window.localStorage.setItem("token","is token");
             let res=await loginApi();
