@@ -4,22 +4,11 @@
         <div id="login">
             <div class="login--account">
                 <span>账号：</span>
-                <input
-                    type="text"
-                    placeholder="随便输"
-                    name="account"
-                    v-model.trim="account"
-                />
+                <input type="text" placeholder="随便输" name="account" v-model.trim="account" />
             </div>
             <div class="login--password">
                 <span>密码：</span>
-                <input
-                    type="password"
-                    placeholder="随便输"
-                    name="password"
-                    v-model.trim="password"
-                    @keyup.enter="login"
-                />
+                <input type="password" placeholder="随便输" name="password" v-model.trim="password" @keyup.enter="login" />
             </div>
             <p class="login--btn">
                 <button class="theme-all" id="loginBtn" @click="login">登录</button>
@@ -30,22 +19,22 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {loginApi} from "@/api/login";
+import { loginApi } from "@/api/login";
 import { useRouter } from 'vue-router';
-import {useStore} from "vuex";
+import { useStore } from "vuex";
 export default defineComponent({
     setup() {
-        let router=useRouter();
-        let store=useStore();
-       
-        let  login =async ()=>{
+        let router = useRouter();
+        let store = useStore();
+
+        let login = async () => {
             // location.reload();
-             //重新触发路由
-            store.commit("SET_PERMISSION",null);
-            router.push({path:"/"});
-            window.localStorage.setItem("token","is token");
-            let res=await loginApi();
-            
+            //重新触发路由
+            store.commit("SET_PERMISSION", null);
+            router.push({ path: "/" });
+            window.localStorage.setItem("token", "is token");
+            let res = await loginApi();
+            console.log(res);
         };
         return {
             login
@@ -60,11 +49,13 @@ export default defineComponent({
     font-size: 22px;
     padding-top: 100px;
 }
+
 #login_wrap {
     position: relative;
     background: rgba(64, 64, 194, 0.1);
     height: 100vh;
-    > div {
+
+    >div {
         background: #fff;
         width: 479px;
         height: 325px;
@@ -73,18 +64,22 @@ export default defineComponent({
         top: 40%;
         left: 50%;
         transform: translate(-50%, -50%);
-        > div {
+
+        >div {
             padding: 10px 0;
             border-bottom: 1px solid #ddd;
+
             &.login--account {
                 margin: 25px 0 30px;
             }
+
             span {
                 color: #666;
                 display: inline-block;
                 width: 84px;
                 font-size: 20px;
             }
+
             input {
                 background: none;
                 font-size: 16px;
@@ -94,9 +89,11 @@ export default defineComponent({
                 padding-left: 12px;
                 box-sizing: border-box;
                 color: #666;
+
                 &.error {
                     border: 1px solid #f00;
                 }
+
                 &::-webkit-input-placeholder {
                     color: #aaa;
                 }
@@ -105,6 +102,7 @@ export default defineComponent({
 
         p {
             text-align: right;
+
             &.login--btn {
                 button {
                     width: 100%;
@@ -118,6 +116,7 @@ export default defineComponent({
                     cursor: pointer;
                 }
             }
+
             a {
                 color: #fff;
                 display: inline-block;
